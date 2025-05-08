@@ -1,0 +1,21 @@
+import { Module } from '@nestjs/common';
+import { SharedModule } from 'src/shared/shared.module';
+import { SubCategoryController } from './controllers/subCategory.controller';
+import { SubCategoryRepository } from './repositories/subCategoryRepository.repository';
+import { CrudSubCategoryService } from './services/crudSubCategory.service';
+import { CrudSubcategoryUseCase } from './useCase/crudSubCategoryUseCase.useCase';
+import { JwtService } from '@nestjs/jwt';
+import { CategoryRepository } from 'src/category/repositories/categoryRepository.repository';
+
+@Module({
+  providers: [
+    CrudSubcategoryUseCase,
+    CrudSubCategoryService,
+    SubCategoryRepository,
+    JwtService,
+    CategoryRepository,
+  ],
+  controllers: [SubCategoryController],
+  imports: [SharedModule.forRoot()],
+})
+export class SubCategoryModule {}

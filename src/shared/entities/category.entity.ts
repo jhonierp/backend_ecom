@@ -8,7 +8,7 @@ import {
   Timestamp,
   UpdateDateColumn,
 } from 'typeorm';
-import { SubcategoryEntity } from './subcategory.entity';
+import { SubCategoryEntity } from './subcategory.entity';
 
 @Entity('categories')
 export class CategoryEntity {
@@ -30,6 +30,6 @@ export class CategoryEntity {
   @DeleteDateColumn()
   deletedAt?: Timestamp;
 
-  @OneToMany(() => SubcategoryEntity, (sub) => sub.category)
-  subcategories?: SubcategoryEntity[];
+  @OneToMany(() => SubCategoryEntity, (sub) => sub.category)
+  subcategories?: SubCategoryEntity[];
 }

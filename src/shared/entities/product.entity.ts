@@ -10,8 +10,9 @@ import {
   Timestamp,
   UpdateDateColumn,
 } from 'typeorm';
-import { SubcategoryEntity } from './subcategory.entity';
+
 import { ProductSpecificationEntity } from './productEspecification.entity';
+import { SubCategoryEntity } from './subcategory.entity';
 
 @Entity('products')
 export class ProductEntity {
@@ -30,9 +31,9 @@ export class ProductEntity {
   @Column('varchar', { length: 255 })
   image: string;
 
-  @ManyToOne(() => SubcategoryEntity)
+  @ManyToOne(() => SubCategoryEntity)
   @JoinColumn({ name: 'subcategory_id' })
-  subcategory: SubcategoryEntity;
+  subcategory: SubCategoryEntity;
 
   @CreateDateColumn()
   createdAt?: Timestamp;

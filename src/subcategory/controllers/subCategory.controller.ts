@@ -10,7 +10,6 @@ import {
   Query,
   UseGuards,
 } from '@nestjs/common';
-import { CrudCategoryUseCase } from '../useCase/crudCategoryUseCase.useCase';
 
 import { ApiBearerAuth, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import {
@@ -26,24 +25,23 @@ import {
 import { AuthGuard } from 'src/shared/guards/auth.guard';
 
 import { PaginateQueryRaw } from 'src/shared/interfaces/paginated';
-import { CreateOrUpdateCategoryDto } from '../dto/category.dto';
-import { GetAllCategoriesPaginatedUseCase } from '../useCase/getAllUsersPaginatedUseCase.useCase';
+import { CreateOrUpdateSubCategoryDto } from '../dto/subCategory.dto';
+import { CrudSubcategoryUseCase } from '../useCase/crudSubCategoryUseCase.useCase';
 
-@ApiTags('category')
-@Controller('category')
-export class CategoryController {
+@ApiTags('subcategory')
+@Controller('subcategory')
+export class SubCategoryController {
   constructor(
-    private readonly crudCategoryUserCase: CrudCategoryUseCase,
-    private readonly getAllCategoriesPaginatedUseCase: GetAllCategoriesPaginatedUseCase,
+    private readonly crudSubCategoryUserCase: CrudSubcategoryUseCase,
   ) {}
   @Post('/create')
   @ApiBearerAuth()
   @ApiOkResponse({ type: CreatedResponse })
   async create(
     @Body()
-    categoryDto: CreateOrUpdateCategoryDto,
+    categoryDto: CreateOrUpdateSubCategoryDto,
   ): Promise<CreatedResponse> {
-    const category = await this.crudCategoryUserCase.create(categoryDto);
+    const category = await this.crudSubCategoryUserCase.create(categoryDto);
     return {
       message: CREATED_MESSAGE,
       id: category,
@@ -56,9 +54,9 @@ export class CategoryController {
   @UseGuards(AuthGuard)
   @ApiOkResponse({ type: UpdatedResponse })
   async update(
-    @Body() categoryDto: CreateOrUpdateCategoryDto,
+    @Body() subCategoryDto: CreateOrUpdateSubCategoryDto,
   ): Promise<UpdatedResponse> {
-    await this.crudCategoryUserCase.update(categoryDto);
+    await this.crudSubCategoryUserCase.update(subCategoryDto);
 
     return {
       message: UPDATED_MESSAGE,
@@ -71,19 +69,10 @@ export class CategoryController {
   @UseGuards(AuthGuard)
   @ApiOkResponse({ type: DeletedResponse })
   async delete(@Param('id') id: number): Promise<DeletedResponse> {
-    await this.crudCategoryUserCase.delete(id);
+    await this.crudSubCategoryUserCase.delete(id);
     return {
       message: DELETED_MESSAGE,
       statusCode: HttpStatus.OK,
     };
-  }
-
-  @Get('/whit-pagination')
-  @ApiBearerAuth()
-  @UseGuards(AuthGuard)
-  async getAllPagination(@Query() params: PaginateQueryRaw) {
-    return await this.getAllCategoriesPaginatedUseCase.getAllCategoriesPaginated(
-      params,
-    );
   }
 }

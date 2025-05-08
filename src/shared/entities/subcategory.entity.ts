@@ -13,7 +13,7 @@ import {
 import { CategoryEntity } from './category.entity';
 
 @Entity('subcategories')
-export class SubcategoryEntity {
+export class SubCategoryEntity {
   @PrimaryGeneratedColumn('increment')
   id?: number;
 
