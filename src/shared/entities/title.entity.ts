@@ -11,7 +11,7 @@ import {
 @Entity('titles')
 export class TitleEntity {
   @PrimaryGeneratedColumn('increment')
-  id: number;
+  id?: number;
 
   @Column('varchar', { length: 255 })
   title: string;

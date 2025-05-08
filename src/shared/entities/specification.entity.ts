@@ -12,7 +12,7 @@ import {
 @Entity('specifications')
 export class SpecificationEntity {
   @PrimaryGeneratedColumn('increment')
-  id: number;
+  id?: number;
 
   @Column('varchar', { length: 255 })
   name: string;

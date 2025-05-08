@@ -16,7 +16,7 @@ import { ProductSpecificationEntity } from './productEspecification.entity';
 @Entity('products')
 export class ProductEntity {
   @PrimaryGeneratedColumn('increment')
-  id: number;
+  id?: number;
 
   @Column('varchar', { length: 255 })
   name: string;

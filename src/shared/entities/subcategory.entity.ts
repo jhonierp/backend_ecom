@@ -15,7 +15,7 @@ import { CategoryEntity } from './category.entity';
 @Entity('subcategories')
 export class SubcategoryEntity {
   @PrimaryGeneratedColumn('increment')
-  id: number;
+  id?: number;
 
   @Column('varchar', { length: 255, nullable: false })
   name: string;

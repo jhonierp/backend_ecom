@@ -20,7 +20,7 @@ export class PaginateQueryRaw {
   @ApiProperty({
     type: String,
     required: false,
-    example: 'rodolfo',
+    example: 'example',
   })
   @IsString()
   @IsOptional()

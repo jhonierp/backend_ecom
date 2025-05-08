@@ -18,7 +18,7 @@ import { TitleEntity } from './title.entity';
 @Entity('product_specifications')
 export class ProductSpecificationEntity {
   @PrimaryGeneratedColumn('increment')
-  id: number;
+  id?: number;
 
   @ManyToOne(() => ProductEntity, (product) => product.specifications)
   @JoinColumn({ name: 'product_id' })
