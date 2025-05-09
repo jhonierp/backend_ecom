@@ -6,6 +6,9 @@ import { CrudSubCategoryService } from './services/crudSubCategory.service';
 import { CrudSubcategoryUseCase } from './useCase/crudSubCategoryUseCase.useCase';
 import { JwtService } from '@nestjs/jwt';
 import { CategoryRepository } from 'src/category/repositories/categoryRepository.repository';
+import { get } from 'http';
+import { GetAllSubCategoriesPaginatedService } from './services/getSubAllCategoriesPaginated.service';
+import { GetAllSubCategoriesPaginatedUseCase } from './useCase/getAllSubCategoryPaginatedUseCase.useCase';
 
 @Module({
   providers: [
@@ -14,6 +17,8 @@ import { CategoryRepository } from 'src/category/repositories/categoryRepository
     SubCategoryRepository,
     JwtService,
     CategoryRepository,
+    GetAllSubCategoriesPaginatedService,
+    GetAllSubCategoriesPaginatedUseCase,
   ],
   controllers: [SubCategoryController],
   imports: [SharedModule.forRoot()],

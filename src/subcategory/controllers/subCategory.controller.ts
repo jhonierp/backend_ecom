@@ -27,12 +27,14 @@ import { AuthGuard } from 'src/shared/guards/auth.guard';
 import { PaginateQueryRaw } from 'src/shared/interfaces/paginated';
 import { CreateOrUpdateSubCategoryDto } from '../dto/subCategory.dto';
 import { CrudSubcategoryUseCase } from '../useCase/crudSubCategoryUseCase.useCase';
+import { GetAllSubCategoriesPaginatedUseCase } from '../useCase/getAllSubCategoryPaginatedUseCase.useCase';
 
 @ApiTags('subcategory')
 @Controller('subcategory')
 export class SubCategoryController {
   constructor(
     private readonly crudSubCategoryUserCase: CrudSubcategoryUseCase,
+    private readonly getAllSubCategoriesPaginatedUseCase: GetAllSubCategoriesPaginatedUseCase,
   ) {}
   @Post('/create')
   @ApiBearerAuth()
@@ -74,5 +76,14 @@ export class SubCategoryController {
       message: DELETED_MESSAGE,
       statusCode: HttpStatus.OK,
     };
+  }
+
+  @Get('/whit-pagination')
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
+  async getAllPagination(@Query() params: PaginateQueryRaw) {
+    return await this.getAllSubCategoriesPaginatedUseCase.getAllSubCategoriesPaginated(
+      params,
+    );
   }
 }

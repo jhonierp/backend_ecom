@@ -27,7 +27,7 @@ import { AuthGuard } from 'src/shared/guards/auth.guard';
 
 import { PaginateQueryRaw } from 'src/shared/interfaces/paginated';
 import { CreateOrUpdateCategoryDto } from '../dto/category.dto';
-import { GetAllCategoriesPaginatedUseCase } from '../useCase/getAllUsersPaginatedUseCase.useCase';
+import { GetAllCategoriesPaginatedUseCase } from '../useCase/getAllCategoryPaginatedUseCase.useCase';
 
 @ApiTags('category')
 @Controller('category')

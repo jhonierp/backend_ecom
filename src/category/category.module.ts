@@ -6,7 +6,7 @@ import { CrudCategoryService } from './services/crudCategory.service';
 import { CategoryRepository } from './repositories/categoryRepository.repository';
 import { JwtService } from '@nestjs/jwt';
 import { GetAllCategoriesPaginatedService } from './services/getAllCategoriesPaginated.service';
-import { GetAllCategoriesPaginatedUseCase } from './useCase/getAllUsersPaginatedUseCase.useCase';
+import { GetAllCategoriesPaginatedUseCase } from './useCase/getAllCategoryPaginatedUseCase.useCase';
 
 @Module({
   providers: [
