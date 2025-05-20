@@ -63,4 +63,20 @@ export class CrudSubCategoryService {
 
     await this.subCategoryRepository.softDelete(id);
   }
+
+  async findOne(id: number): Promise<SubCategoryEntity> {
+    const subCategory = await this.subCategoryRepository.findOne({
+      where: { id },
+      relations: ['category'], // Incluir la relación con la categoría
+    });
+
+    if (!subCategory) {
+      throw new HttpException(
+        'Subcategoría no encontrada',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    return subCategory;
+  }
 }

@@ -15,7 +15,8 @@ export class GetAllSubCategoriesPaginatedService {
     params: PaginateQueryRaw,
   ): Promise<Paginated<SubCategoryEntity>> {
     const subcategoryQuery =
-      this.subCategoryRepository.createQueryBuilder('subcategory');
+      this.subCategoryRepository.createQueryBuilder('subcategory')
+      .leftJoinAndSelect('subcategory.category', 'category'); // Incluir la relación con la categoría
 
     if (params.search) {
       subcategoryQuery.where(

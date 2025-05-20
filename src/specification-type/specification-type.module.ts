@@ -1,0 +1,14 @@
+import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { SpecificationTypeEntity } from '../shared/entities/specificationType.entity';
+import { CrudSpecificationTypeService } from './services/crudSpecificationType.service';
+import { SpecificationTypeUseCase } from './usecase/specificationType.usecase';
+import { SpecificationTypeController } from './controllers/specificationType.controller';
+
+@Module({
+  imports: [TypeOrmModule.forFeature([SpecificationTypeEntity])],
+  providers: [CrudSpecificationTypeService, SpecificationTypeUseCase],
+  controllers: [SpecificationTypeController],
+  exports: [CrudSpecificationTypeService, SpecificationTypeUseCase],
+})
+export class SpecificationTypeModule {}
