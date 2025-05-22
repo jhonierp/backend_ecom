@@ -78,7 +78,7 @@ export class CategoryController {
     };
   }
 
-  @Get('/whit-pagination')
+  @Get('/with-pagination')
   @ApiBearerAuth()
   @UseGuards(AuthGuard)
   async getAllPagination(@Query() params: PaginateQueryRaw) {
