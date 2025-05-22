@@ -1,11 +1,9 @@
 import {
-  Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
-  OneToMany,
   PrimaryGeneratedColumn,
   Timestamp,
   UpdateDateColumn,
@@ -28,9 +26,9 @@ export class ProductSpecificationEntity {
   @JoinColumn({ name: 'specification_id' })
   specification: SpecificationEntity;
 
-  @ManyToOne(() => TitleEntity)
+  @ManyToOne(() => TitleEntity, { nullable: true })
   @JoinColumn({ name: 'title_id' })
-  title: TitleEntity;
+  title?: TitleEntity | null;
 
   @ManyToOne(() => SpecificationTypeEntity)
   @JoinColumn({ name: 'specification_type_id' })

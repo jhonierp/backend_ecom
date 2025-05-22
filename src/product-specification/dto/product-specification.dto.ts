@@ -29,11 +29,12 @@ export class CreateOrUpdateProductSpecificationDto {
 
   @ApiProperty({
     type: Number,
-    nullable: false,
-    required: true,
+    nullable: true,
+    required: false,
   })
   @IsNumber()
-  titleId: number;
+  @IsOptional()
+  titleId?: number | null;
 
   @ApiProperty({
     type: Number,
