@@ -7,13 +7,22 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CrudProductUseCase } from '../useCase/crudProductUseCase.useCase';
 import { CreateOrUpdateProductDto } from '../dto/product.dto';
-import { CreatedResponse, DeletedResponse, UpdatedResponse } from 'src/shared/dto/response.dto';
-import { CREATED_MESSAGE, UPDATED_MESSAGE } from 'src/shared/const/response.conts';
+import {
+  CreatedResponse,
+  DeletedResponse,
+  UpdatedResponse,
+} from 'src/shared/dto/response.dto';
+import {
+  CREATED_MESSAGE,
+  UPDATED_MESSAGE,
+} from 'src/shared/const/response.conts';
 import { ProductEntity } from 'src/shared/entities/product.entity';
+import { AuthGuard } from 'src/shared/guards/auth.guard';
 
 @ApiTags('product')
 @Controller('product')
@@ -22,8 +31,11 @@ export class productController {
 
   @Post()
   @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @ApiOkResponse({ type: CreatedResponse })
-  async create(@Body() productDto: CreateOrUpdateProductDto): Promise<CreatedResponse> {
+  async create(
+    @Body() productDto: CreateOrUpdateProductDto,
+  ): Promise<CreatedResponse> {
     const product = await this.crudProductUseCase.create(productDto);
     return {
       message: CREATED_MESSAGE,
@@ -34,6 +46,7 @@ export class productController {
 
   @Get()
   @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @ApiOkResponse({ type: [ProductEntity] })
   async findAll() {
     return await this.crudProductUseCase.findAll();
@@ -41,6 +54,7 @@ export class productController {
 
   @Get(':id')
   @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @ApiOkResponse({ type: ProductEntity })
   async findOne(@Param('id') id: string) {
     return await this.crudProductUseCase.findOne(+id);
@@ -48,6 +62,7 @@ export class productController {
 
   @Put(':id')
   @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @ApiOkResponse({ type: UpdatedResponse })
   async update(
     @Param('id') id: string,
@@ -65,6 +80,7 @@ export class productController {
 
   @Delete(':id')
   @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @ApiOkResponse({ type: DeletedResponse })
   async remove(@Param('id') id: string): Promise<DeletedResponse> {
     await this.crudProductUseCase.delete(+id);

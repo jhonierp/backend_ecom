@@ -4,10 +4,15 @@ import { ProductSpecificationEntity } from '../shared/entities/productEspecifica
 import { CrudProductSpecificationService } from './services/crudProductSpecification.service';
 import { ProductSpecificationController } from './controllers/productSpecification.controller';
 import { ProductSpecificationUseCase } from './usecase/productSpecification.usecase';
+import { JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [TypeOrmModule.forFeature([ProductSpecificationEntity])],
-  providers: [CrudProductSpecificationService, ProductSpecificationUseCase],
+  providers: [
+    CrudProductSpecificationService,
+    ProductSpecificationUseCase,
+    JwtService,
+  ],
   controllers: [ProductSpecificationController],
   exports: [CrudProductSpecificationService, ProductSpecificationUseCase],
 })

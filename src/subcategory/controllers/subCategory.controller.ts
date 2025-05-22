@@ -38,6 +38,7 @@ export class SubCategoryController {
   ) {}
   @Post('/create')
   @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @ApiOkResponse({ type: CreatedResponse })
   async create(
     @Body()

@@ -7,6 +7,7 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { ProductSpecificationUseCase } from '../usecase/productSpecification.usecase';
 import {
@@ -26,6 +27,7 @@ import {
   UPDATED_MESSAGE,
 } from 'src/shared/const/response.conts';
 import { ProductSpecificationEntity } from 'src/shared/entities/productEspecification.entity';
+import { AuthGuard } from 'src/shared/guards/auth.guard';
 
 @ApiTags('product-specification')
 @Controller('product-specification')
@@ -36,6 +38,7 @@ export class ProductSpecificationController {
 
   @Post()
   @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @ApiCreatedResponse({ type: CreatedResponse })
   async create(
     @Body() createDto: CreateOrUpdateProductSpecificationDto,
@@ -53,6 +56,7 @@ export class ProductSpecificationController {
 
   @Get()
   @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @ApiOkResponse({ type: [ProductSpecificationEntity] })
   async findAll() {
     return await this.productSpecificationUseCase.getAllProductSpecifications();
@@ -60,6 +64,7 @@ export class ProductSpecificationController {
 
   @Get(':id')
   @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @ApiOkResponse({ type: ProductSpecificationEntity })
   async findOne(@Param('id') id: string): Promise<ProductSpecificationEntity> {
     return await this.productSpecificationUseCase.getProductSpecificationById(
@@ -69,6 +74,7 @@ export class ProductSpecificationController {
 
   @Get('product/:productId')
   @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @ApiOkResponse({ type: [ProductSpecificationEntity] })
   async findByProductId(
     @Param('productId') productId: string,
@@ -79,6 +85,7 @@ export class ProductSpecificationController {
   }
 
   @Put(':id')
+  @UseGuards(AuthGuard)
   @ApiBearerAuth()
   @ApiOkResponse({ type: UpdatedResponse })
   async update(
@@ -96,6 +103,7 @@ export class ProductSpecificationController {
   }
 
   @Delete(':id')
+  @UseGuards(AuthGuard)
   @ApiBearerAuth()
   @ApiOkResponse({ type: DeletedResponse })
   async remove(@Param('id') id: string): Promise<DeletedResponse> {
