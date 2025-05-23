@@ -17,14 +17,14 @@ export class CrudProductService {
 
   async findAll() {
     return await this.productRepository.find({
-      relations: ['subcategory', 'subcategory.category'],
+      relations: ['subcategory', 'subcategory.category', 'images'],
     });
   }
 
   async findOne(id: number) {
     const product = await this.productRepository.findOne({
       where: { id },
-      relations: ['subcategory', 'subcategory.category'],
+      relations: ['subcategory', 'subcategory.category', 'images'],
     });
     if (!product) {
       throw new HttpException('Producto no encontrado', HttpStatus.NOT_FOUND);

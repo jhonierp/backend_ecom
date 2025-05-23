@@ -29,7 +29,7 @@ import { AuthGuard } from 'src/shared/guards/auth.guard';
 export class productController {
   constructor(private readonly crudProductUseCase: CrudProductUseCase) {}
 
-  @Post()
+  @Post('/create')
   @ApiBearerAuth()
   @UseGuards(AuthGuard)
   @ApiOkResponse({ type: CreatedResponse })

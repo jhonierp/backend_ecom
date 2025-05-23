@@ -32,7 +32,7 @@ export class ProductEntity {
   @OneToMany(() => ProductImageEntity, (image) => image.product, {
     cascade: true, // importante para que se guarden las imágenes automáticamente
   })
-  images: ProductImageEntity[];
+  images?: ProductImageEntity[];
 
   @ManyToOne(() => SubCategoryEntity)
   @JoinColumn({ name: 'subcategory_id' })

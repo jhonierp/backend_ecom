@@ -8,6 +8,7 @@ import { productController } from './controllers/product.controller';
 import { SubCategoryModule } from 'src/subcategory/subcategory.module';
 import { ProductEntity } from '../shared/entities/product.entity';
 import { ProductImageEntity } from 'src/shared/entities/ProductImage.entity';
+import { CrudImageProductService } from './services/crudImageProduct.service';
 
 @Module({
   imports: [
@@ -15,7 +16,12 @@ import { ProductImageEntity } from 'src/shared/entities/ProductImage.entity';
     SharedModule.forRoot(),
     SubCategoryModule,
   ],
-  providers: [CrudProductUseCase, CrudProductService, JwtService],
+  providers: [
+    CrudProductUseCase,
+    CrudProductService,
+    JwtService,
+    CrudImageProductService,
+  ],
   controllers: [productController],
   exports: [CrudProductService, CrudProductUseCase],
 })
