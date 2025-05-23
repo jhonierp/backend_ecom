@@ -20,7 +20,11 @@ export class CrudProductUseCase {
       name: productDto.name,
       description: productDto.description,
       price: productDto.price,
-      image: productDto.image,
+      images: productDto.imageUrls.map((url) => ({
+        id: undefined, // or null, depending on your entity definition
+        url,
+        product: undefined, // or null, will be set by ORM relation
+      })), // Asociar múltiples imágenes
       subcategory,
     };
     return await this.crudProductService.create(product);
@@ -43,7 +47,11 @@ export class CrudProductUseCase {
       name: productDto.name,
       description: productDto.description,
       price: productDto.price,
-      image: productDto.image,
+      images: productDto.imageUrls.map((url) => ({
+        id: undefined, // or null, depending on your entity definition
+        url,
+        product: undefined, // or null, will be set by ORM relation
+      })), // Asociar múltiples imágenes
       subcategory,
     };
 

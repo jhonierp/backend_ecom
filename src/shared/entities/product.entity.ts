@@ -13,6 +13,7 @@ import {
 
 import { ProductSpecificationEntity } from './productEspecification.entity';
 import { SubCategoryEntity } from './subcategory.entity';
+import { ProductImageEntity } from './ProductImage.entity';
 
 @Entity('products')
 export class ProductEntity {
@@ -28,8 +29,10 @@ export class ProductEntity {
   @Column('decimal', { precision: 10, scale: 2 })
   price: number;
 
-  @Column('varchar', { length: 255 })
-  image: string;
+  @OneToMany(() => ProductImageEntity, (image) => image.product, {
+    cascade: true, // importante para que se guarden las imágenes automáticamente
+  })
+  images: ProductImageEntity[];
 
   @ManyToOne(() => SubCategoryEntity)
   @JoinColumn({ name: 'subcategory_id' })

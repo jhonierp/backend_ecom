@@ -1,5 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {  IsNumber, IsOptional, IsString } from 'class-validator';
+import {
+  ArrayNotEmpty,
+  IsArray,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
 export class CreateOrUpdateProductDto {
   @ApiProperty({
@@ -36,12 +42,15 @@ export class CreateOrUpdateProductDto {
   price: number;
 
   @ApiProperty({
-    type: String,
+    type: [String], // Cambiado a array de strings
     nullable: false,
     required: true,
+    example: ['https://mi-sitio.com/img1.jpg', 'https://mi-sitio.com/img2.jpg'],
   })
-  @IsString()
-  image: string;
+  @IsArray()
+  @ArrayNotEmpty()
+  @IsString({ each: true })
+  imageUrls: string[];
 
   @ApiProperty({
     type: Number,

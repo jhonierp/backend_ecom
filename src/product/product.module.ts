@@ -7,19 +7,16 @@ import { JwtService } from '@nestjs/jwt';
 import { productController } from './controllers/product.controller';
 import { SubCategoryModule } from 'src/subcategory/subcategory.module';
 import { ProductEntity } from '../shared/entities/product.entity';
+import { ProductImageEntity } from 'src/shared/entities/ProductImage.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([ProductEntity]),
+    TypeOrmModule.forFeature([ProductEntity, ProductImageEntity]),
     SharedModule.forRoot(),
-    SubCategoryModule
+    SubCategoryModule,
   ],
-  providers: [
-    CrudProductUseCase,
-    CrudProductService,
-    JwtService,
-  ],
+  providers: [CrudProductUseCase, CrudProductService, JwtService],
   controllers: [productController],
-  exports: [CrudProductService, CrudProductUseCase]
+  exports: [CrudProductService, CrudProductUseCase],
 })
 export class ProductModule {}
